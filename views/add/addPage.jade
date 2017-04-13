@@ -1,0 +1,35 @@
+doctype
+html(lang='en')
+  head
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    meta(charset='utf-8')
+    title
+  body
+
+    form(action="/Add/addPage" method="POST" )
+      div(class="form-group")
+        label(for="name") Name
+        input(type="text",name="name",placeholder="Name",id="name",class="form-control")
+ 
+ 
+      div
+        label(for="url") Url
+        input(type="text",name="url",placeholder="Url",id="url",class="form-control")
+  
+
+      div
+        label(for="protocol") Security Protocol
+        input(type="text",name="protocol",placeholder="Protocol",id="protocol",class="form-control")
+
+
+    
+      
+
+      div
+        label(for="ishttp") isHttp
+        input(type="checkbox",name="ishttp",placeholder="ishttp",id="ishttp",class="form-control")
+
+
+        div(class="row top-space")
+          div(class="col-xs-12 col-sm-6")
+            input(type="submit" value="Crear" class="btn btn-info")

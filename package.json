@@ -1,0 +1,26 @@
+{
+  "name": "phishingmongo",
+  "version": "1.0.0",
+  "description": "CRUD Mongo",
+  "main": "controller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alestorm980/PhishingMongo.git"
+  },
+  "author": "phishing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alestorm980/PhishingMongo/issues"
+  },
+  "homepage": "https://github.com/alestorm980/PhishingMongo#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.4"
+  }
+}

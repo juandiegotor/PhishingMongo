@@ -1,0 +1,36 @@
+doctype
+html(lang='en')
+  head
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    meta(charset='utf-8')
+    title
+  body
+  
+    form(action="/Add/addUser" method="POST" )
+      div(class="form-group") 
+        label(for="name") Name
+        input(type="text",name="name",placeholder="Name",id="name",class="form-control")
+        
+        
+      div
+        label(for="lastname") Last Name
+        input(type="text",name="lastname",placeholder="LastName",id="lastname",class="form-control")
+        
+      
+      div
+        label(for="address") Address
+        input(type="text",name="address",placeholder="Address",id="address",class="form-control")  
+          
+      
+      div
+        label(for="identification") Identification
+        input(type="text",name="identification",placeholder="Identification",id="identification",class="form-control")    
+        
+      
+        div(class="row top-space")
+          div(class="col-xs-12 col-sm-6")
+            input(type="submit" value="Crear" class="btn btn-info")
+            
+      
+        
+        
