@@ -47,7 +47,12 @@ app.get("/Add/adduser",function(req,res){
 
 app.get("/user",function(req,res){
 
-  res.render("User.jade");
+  User.find().exec(function(err,users){
+
+   res.render("User.jade",{users:users});
+
+  });
+
 
 });
 
@@ -70,9 +75,48 @@ app.get("/account",function(req,res){
 
 app.get("/page",function(req,res){
 
-  res.render("Page.jade");
+
+
+  Page.find().exec(function(err,pages){
+
+  res.render("Page.jade",{pages:pages});
+
+  });
 
 });
+
+
+
+//borrar usuario
+app.get("/delete/user/:id",function(req,res){
+
+  User.findOneAndRemove({_id:req.params.id},function(err){
+
+    if(!err){
+      res.redirect("/user");
+    }else{
+      console.log(err);
+    }
+
+  });
+});
+
+//borrar pagina
+
+app.get("/delete/page/:id",function(req,res){
+
+  Page.findOneAndRemove({_id:req.params.id},function(err){
+
+    if(!err){
+      res.redirect("/page");
+    }else{
+      console.log(err);
+    }
+
+  });
+});
+
+
 
 //------------------------------------------------------
 

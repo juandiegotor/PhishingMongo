@@ -10,7 +10,12 @@ html(lang='en')
         h2 Buscar
       li 
         h2
-          a(href="/Add/adduser") Crear
-      li 
-        h2
-          a(href="/") Eliminar   
+          a(href="/Add/adduser" ) Crear
+      
+       
+        for user in users
+          div
+            p= user
+            a(href="/delete/user/#{user._id}" ) Eliminar  
+            
+        

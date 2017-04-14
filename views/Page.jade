@@ -4,13 +4,18 @@ html(lang='en')
     meta(charset='utf-8')
     title
   body
-    h1 Phishing Page
+    h1 Page
     ul
       li
         h2 Buscar
       li 
         h2
           a(href="/Add/addPage") Crear
-      li 
-        h2
-          a(href="/") Eliminar   
+    
+       
+        for page in pages
+          div
+            p= page
+            a(href="/delete/page/#{page._id}" ) Eliminar  
+            
+        
