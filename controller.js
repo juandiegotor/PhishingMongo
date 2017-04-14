@@ -24,6 +24,46 @@ app.get("/",function(req,res){
 
 });
 
+app.get("/edit/editAccount/:id",function(req,res){
+
+  Account.findOne({_id:req.params.id}).populate("ownerUser").populate("ownerPage")
+  .exec(function(err,account){
+
+
+      res.render("./edit/editAccount.jade",{account:account});
+
+  });
+
+
+
+});
+
+app.get("/edit/editPage/:id",function(req,res){
+
+
+Page.findOne({_id:req.params.id}).exec(function(err,page){
+
+  res.render("./edit/editPage.jade",{page:page});
+
+
+  });
+
+
+});
+
+
+app.get("/edit/editUser/:id",function(req,res){
+
+  User.findOne({_id:req.params.id}).exec(function(err,user){
+
+    res.render("./edit/editUser.jade",{user:user});
+
+
+    });
+
+});
+
+
 
 app.get("/Add/addAccount",function(req,res){
 
@@ -135,7 +175,7 @@ app.get("/delete/page/:id",function(req,res){
 app.get("/page/search/:busq",function(req,res){
 
 
-  Page.search(req.params.busq,function(err,pages){
+  Page.find({name:req.params.busq},function(err,pages){
 
        if(!err){
          res.render("Page.jade",{pages:pages});
@@ -145,12 +185,30 @@ app.get("/page/search/:busq",function(req,res){
        }
 
     });
+
   });
+
+
+  app.get("/account/search/:busq",function(req,res){
+
+
+    Account.find({username:req.params.busq}).populate("ownerPage").populate("ownerUser").exec(function(err,accounts){
+
+         if(!err){
+           res.render("Account.jade",{accounts:accounts});
+         }
+         else{
+           res.redirect("/account");
+         }
+
+      });
+
+    });
 
   app.get("/user/search/:busq",function(req,res){
 
 
-    User.search(req.params.busq,function(err,users){
+    User.find({name:req.params.busq},function(err,users){
         //console.log(users);
          if(!err){
            res.render("User.jade",{users:users});
@@ -275,6 +333,24 @@ app.post("/page/search",function(req,res){
 
 });
 
+
+app.post("/account/search",function(req,res){
+
+  var busqueda=String(req.body.search);
+
+  if(busqueda!=""){
+    console.log(busqueda);
+    res.redirect("/account/search/"+busqueda);
+
+
+  }else{
+  res.redirect("/account");
+  }
+
+
+
+});
+
 app.post("/user/search",function(req,res){
 
   var busqueda=String(req.body.search);
@@ -342,7 +418,109 @@ Page.findOne({name:req.body.page}).exec(function(err,pages){
 
 //  res.redirect("/Add/addAccount");
 
+});
 
+//-------------------Edit---------------------
+
+app.post("/edit/editAccount/:id",function(req,res){
+
+  var ischangeda=false;
+
+  if(String(req.body.ischanged)=="on"){
+  ischangeda=true;
+  }
+
+
+Page.findOne({name:req.body.page}).exec(function(err,pages){
+  if(!err&&pages!=null){
+
+  var pageId=pages._id;
+    console.log(pageId);
+
+    User.findOne({name:req.body.user}).exec(function(err,users){
+
+      if(!err&&users!=null){
+      var  userId=users._id;
+        console.log(userId);
+
+        var data={
+          username:req.body.username,
+          password:req.body.password,
+          isChanged:ischangeda,
+          ownerUser:userId,
+          ownerPage:pageId
+        };
+
+        Account.update({_id:req.params.id},data,function(err){
+          if(!err){
+            res.redirect("/account");
+          }else{
+            console.log(err);
+          }
+
+
+        });
+
+      }
+
+    else{
+      res.send("us no valido");
+    }
+
+    });
+
+  }else{
+    res.send("pag no valida");
+  }
+
+});
+
+});
+
+app.post("/edit/editPage/:id",function(req,res){
+
+  var ishttpa=false;
+
+  if(String(req.body.ishttp)=="on"){
+  ishttpa=true;
+  }
+
+  var data={
+  name:req.body.name,
+  url:req.body.url,
+  ishttp:ishttpa,
+  protocol:req.body.protocol
+  }
+
+    Page.update({_id:req.params.id},data,function(err){
+
+      if(!err){
+        res.redirect("/page");
+      }else{
+        console.log(err);
+      }
+
+    });
+});
+
+
+app.post("/edit/editUser/:id",function(req,res){
+
+  var data ={
+    name:req.body.name,
+    lastname:req.body.lastname,
+    address:req.body.address,
+    identification:req.body.identification
+  };
+
+    User.update({_id:req.params.id},data,function(err){
+            if(!err){
+              res.redirect("/user");
+            }else{
+              console.log(err);
+            }
+
+    });
 
 
 
@@ -351,7 +529,6 @@ Page.findOne({name:req.body.page}).exec(function(err,pages){
 
 
 });
-
 
 
 

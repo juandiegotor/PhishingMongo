@@ -1,5 +1,5 @@
 var mongoose=require("mongoose");//llamo la libreria de mongoose
-var searchable = require('mongoose-searchable');
+//var searchable = require('mongoose-searchable');
 var Schema=mongoose.Schema;//guardo los Schemas de mongoose en una variable
 
 
@@ -14,13 +14,6 @@ var page_schema=new Schema({
 
 
 
-page_schema.plugin(searchable,{
-    keywordField:'keywords',
-    language:'english',
-    fields:['name'],
-    extract: function(content, done){
-        done(null, content.split(' '));
-    }});
 
 
 var Page=mongoose.model("Page",page_schema);

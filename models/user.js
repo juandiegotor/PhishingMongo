@@ -1,5 +1,5 @@
 var mongoose=require("mongoose");//llamo la libreria de mongoose
-var searchable = require('mongoose-searchable');
+//var searchable = require('mongoose-searchable');
 var Schema=mongoose.Schema;//guardo los Schemas de mongoose en una variable
 
 mongoose.connect("mongodb://localhost/phishing");//conexion a mongo
@@ -18,13 +18,6 @@ identification:{type:Number,required:[true,"identification requerida"],unique:[t
 });
 
 
-user_schema.plugin(searchable,{
-    keywordField:'keywords',
-    language:'english',
-    fields:['name' ,'identification'],
-    extract: function(content, done){
-        done(null, content.split(' '));
-    }});
 
 var User=mongoose.model("User",user_schema);//Creacion del modelo se llama User
 

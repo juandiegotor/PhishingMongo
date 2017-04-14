@@ -5,16 +5,20 @@ html(lang='en')
     title
   body
     h1  Account
-    ul
-      li
-        h2 Buscar
-      li 
+    
+    form(action="/account/search",method="POST" )
+      input(type="text",name="search",placeholder="Search",id="search",class="form-control")
+      div(class="row top-space")
+         div(class="col-xs-12 col-sm-6")
+           input(type="submit" value="Buscar" class="btn btn-info")
+    
         h2
           a(href="/Add/addAccount") Crear
           
       for account in accounts
         div
-          p Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} Username: #{account.username}
+          p  Username: #{account.username} Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} 
               a(href="/delete/account/#{account._id}" ) Eliminar 
+              a(href="/edit/editAccount/#{account._id}" ) Editar 
           
                   
