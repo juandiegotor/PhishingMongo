@@ -21,6 +21,7 @@
     "express": "^4.15.2",
     "jade": "^1.11.0",
     "method-override": "^2.3.8",
-    "mongoose": "^4.9.4"
+    "mongoose": "^4.9.4",
+    "mongoose-searchable": "^1.0.0"
   }
 }

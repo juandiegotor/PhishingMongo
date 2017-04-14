@@ -117,6 +117,41 @@ app.get("/delete/page/:id",function(req,res){
 });
 
 
+app.get("/page/search/:busq",function(req,res){
+
+
+  Page.search(req.params.busq,function(err,pages){
+
+       if(!err){
+         res.render("Page.jade",{pages:pages});
+       }
+       else{
+         res.redirect("/page");
+       }
+
+    });
+  });
+
+  app.get("/user/search/:busq",function(req,res){
+
+
+    User.search(req.params.busq,function(err,users){
+        //console.log(users);
+         if(!err){
+           res.render("User.jade",{users:users});
+         }
+         else{
+           res.redirect("/user");
+         }
+
+    });
+
+    });
+
+
+
+
+
 
 //------------------------------------------------------
 
@@ -146,7 +181,7 @@ var user =new User({
 //Se guarda con una promise necesita dos funciones como parametro
 user.save().then(function(us){
 
- res.send("El usuario se guardo exitosamente");
+ //res.send("El usuario se guardo exitosamente");
 
 
 
@@ -156,7 +191,8 @@ user.save().then(function(us){
 },function(err){
 
 console.log(err);
-res.send("No se pudo guardar");
+//res.send("No se pudo guardar");
+res.redirect("/user");
 
 
 });
@@ -193,19 +229,54 @@ console.log(ishttpa);
   });
 
 page.save().then(function(pa){
-  res.send("Pagina guardada exitosamente");
+  //res.send("Pagina guardada exitosamente");
+  res.redirect("/page");
 
 },function(err){
   console.log(err);
-  res.send("No se pudo guardar la pagina");
+  //res.send("No se pudo guardar la pagina");
+  res.redirect("/page");
+
+
+
+});
+});
+
+
+app.post("/page/search",function(req,res){
+
+  var busqueda=String(req.body.search);
+
+  if(busqueda!=""){
+    console.log(busqueda);
+    res.redirect("/page/search/"+busqueda);
+
+
+  }else{
+  res.redirect("/page");
+  }
 
 
 
 });
 
+app.post("/user/search",function(req,res){
+
+  var busqueda=String(req.body.search);
+
+  if(busqueda!=""){
+    console.log(busqueda);
+    res.redirect("/user/search/"+busqueda);
+  }
+  else{
+  res.redirect("/user");
+  }
+
+
 
 
 });
+
 
 
 

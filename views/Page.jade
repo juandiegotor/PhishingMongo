@@ -5,17 +5,22 @@ html(lang='en')
     title
   body
     h1 Page
-    ul
-      li
-        h2 Buscar
-      li 
-        h2
-          a(href="/Add/addPage") Crear
+    
+      
+  form(action="/page/search",method="POST" )
+    input(type="text",name="search",placeholder="Search",id="search",class="form-control")
+    div(class="row top-space")
+       div(class="col-xs-12 col-sm-6")
+         input(type="submit" value="Buscar" class="btn btn-info")
+    
+
+    h2
+      a(href="/Add/addPage") Crear
     
        
-        for page in pages
-          div
-            p= page
-            a(href="/delete/page/#{page._id}" ) Eliminar  
+    for page in pages
+      div
+      p Nombre: #{page.name}  URL: #{page.url}
+        a(href="/delete/page/#{page._id}" ) Eliminar  
             
         

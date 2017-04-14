@@ -5,17 +5,22 @@ html(lang='en')
     title
   body
     h1 User
-    ul
-      li
-        h2 Buscar
-      li 
-        h2
-          a(href="/Add/adduser" ) Crear
+    
       
+  form(action="/user/search",method="POST" )
+    input(type="text",name="search",placeholder="Search",id="search",class="form-control")
+    div(class="row top-space")
+       div(class="col-xs-12 col-sm-6")
+         input(type="submit" value="Buscar" class="btn btn-info")
+    
+
+    h2
+      a(href="/Add/addUser") Crear
+    
        
-        for user in users
-          div
-            p= user
-            a(href="/delete/user/#{user._id}" ) Eliminar  
+    for user in users
+      div
+      p Nombre: #{user.name}  identification #{user.identification}
+        a(href="/delete/user/#{user._id}" ) Eliminar  
             
         
