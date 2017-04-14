@@ -1,10 +1,5 @@
-doctype
-html(lang='en')
-  head
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    meta(charset='utf-8')
-    title
-  body
+extends .././layout.jade
+block contenido
 
     form(action="/edit/editPage/#{page._id}" method="POST" )
       div(class="form-group")

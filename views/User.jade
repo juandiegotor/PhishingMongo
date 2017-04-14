@@ -1,12 +1,9 @@
-doctype
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    title
-  body
-    h1 User
-    
-      
+extends ./layout.jade
+block contenido
+  
+  h1 User 
+  h2
+    a(href="/Add/addUser") Crear usuario   
   form(action="/user/search",method="POST" )
     input(type="text",name="search",placeholder="Search",id="search",class="form-control")
     div(class="row top-space")
@@ -14,14 +11,18 @@ html(lang='en')
          input(type="submit" value="Buscar" class="btn btn-info")
     
 
-    h2
-      a(href="/Add/addUser") Crear
+  
     
-       
+  div(class="container")       
     for user in users
       div
-      p Nombre: #{user.name}  identification #{user.identification}
-        a(href="/delete/user/#{user._id}" ) Eliminar  
-        a(href="/edit/editUser/#{user._id}" ) Editar  
+        .white.border.tr.large-padding
+          .row
+            .col-md-10
+              h4 Nombre: #{user.name}  identification #{user.identification}
+              .col-md-2
+            
+                  a(href="/delete/user/#{user._id}" class="right-space" ) Eliminar  
+                  a(href="/edit/editUser/#{user._id}" ) Editar  
             
         

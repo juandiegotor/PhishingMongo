@@ -2,7 +2,10 @@ var express= require("express");//llamo a express
 var bodyParser=require("body-parser");//parser que sirve con los form y peticiones json
 var methodOverride=require("method-override");//para sobrescribir un metodo que sirve para borrar
 
+
 var app=express();//se inicia express
+
+
 
 var User=require("./models/user").User;
 var Page=require("./models/page").Page;
@@ -16,6 +19,8 @@ app.use(methodOverride("_method"));
 //-----------------------------
 
 
+
+app.use("/public",express.static('public'));//usar esta carpeta
 
 //redirecciono a las paginas cuando el link sea alguno de estos
 //---------------GET---------------------------------------
@@ -135,6 +140,7 @@ app.get("/delete/account/:id",function(req,res){
 
     if(!err){
       res.redirect("/account");
+
     }else{
       console.log(err);
     }
@@ -148,7 +154,14 @@ app.get("/delete/user/:id",function(req,res){
   User.findOneAndRemove({_id:req.params.id},function(err){
 
     if(!err){
-      res.redirect("/user");
+
+        Account.findOneAndRemove({ownerUser:req.params.id},function(err){
+             if(!err){
+               res.redirect("/user");
+             }
+
+        });
+
     }else{
       console.log(err);
     }
@@ -163,7 +176,15 @@ app.get("/delete/page/:id",function(req,res){
   Page.findOneAndRemove({_id:req.params.id},function(err){
 
     if(!err){
-      res.redirect("/page");
+
+
+
+              Account.findOneAndRemove({ownerPage:req.params.id},function(err){
+                   if(!err){
+                     res.redirect("/page");
+                   }
+
+              });
     }else{
       console.log(err);
     }

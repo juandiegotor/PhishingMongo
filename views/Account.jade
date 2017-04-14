@@ -1,10 +1,8 @@
-doctype
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    title
-  body
+extends ./layout.jade
+block contenido
     h1  Account
+    h2
+      a(href="/Add/addAccount") Crear Cuenta
     
     form(action="/account/search",method="POST" )
       input(type="text",name="search",placeholder="Search",id="search",class="form-control")
@@ -12,13 +10,16 @@ html(lang='en')
          div(class="col-xs-12 col-sm-6")
            input(type="submit" value="Buscar" class="btn btn-info")
     
-        h2
-          a(href="/Add/addAccount") Crear
-          
+        
+    div(class="container")      
       for account in accounts
         div
-          p  Username: #{account.username} Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} 
-              a(href="/delete/account/#{account._id}" ) Eliminar 
-              a(href="/edit/editAccount/#{account._id}" ) Editar 
+          .white.border.tr.large-padding
+            .row
+              .col-md-10
+                h4  Username: #{account.username} Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} 
+                .col-md-2
+                  a(href="/delete/account/#{account._id}" ) Eliminar 
+                  a(href="/edit/editAccount/#{account._id}" ) Editar 
           
                   
