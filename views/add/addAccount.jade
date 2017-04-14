@@ -14,17 +14,15 @@ block contenido
 
       div
         label(for="page") Page
-        select(id="page" name="page" class="form-control")
-          for page in pages
-            option(value="#{page.name}") #{page.name}
-          
-
+        select(name='page',placeholder="Page",id="pepe",class="form-control")
+          each page in pages
+            option(value='#{page._id}') #{page.name} (#{page.url}),&emsp;id: #{page._id}
 
       div
         label(for="user") User
-        select(id="user" name="user" class="form-control")
-          for user in users
-            option(value="#{user.name}") #{user.name}
+        select(name='user',placeholder="User",id="user",class="form-control")
+          each user in users
+            option(value='#{user._id}') #{user.name} #{user.lastname},&emsp;id: #{user._id}
       
         div
           label(for="ischanged") isChanged

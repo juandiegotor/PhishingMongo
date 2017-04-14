@@ -2,13 +2,13 @@ extends ./layout.jade
 block contenido
     h1  Account
     h2
-      a(href="/Add/addAccount") Create Account
+      a(href="/Add/addAccount") Crear Cuenta
     
     form(action="/account/search",method="POST" )
       input(type="text",name="search",placeholder="Search",id="search",class="form-control")
       div(class="row top-space")
          div(class="col-xs-12 col-sm-6")
-           input(type="submit" value="Search" class="btn btn-info")
+           input(type="submit" value="Buscar" class="btn btn-info")
     
         
     div(class="container")      
@@ -17,9 +17,9 @@ block contenido
           .white.border.tr.large-padding
             .row
               .col-md-10
-                h4  Username: #{account.username} Password: #{account.password} User: #{account.ownerUser.name} #{account.ownerUser.lastname}  Page: #{account.ownerPage.name} 
+                h4  Username: #{account.username} Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} 
                 .col-md-2
-                  a(href="/edit/editAccount/#{account._id}" ) Edit   
-                  a(href="/delete/account/#{account._id}" ) Delete 
+                  a(href="/delete/account/#{account._id}" ) Eliminar 
+                  a(href="/edit/editAccount/#{account._id}" ) Editar 
           
                   

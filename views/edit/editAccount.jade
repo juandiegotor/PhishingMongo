@@ -14,22 +14,18 @@ block contenido
 
       div
         label(for="page") Page
-        select(id="page" name="page" class="form-control")
-            option(value="#{account.ownerPage.name}") #{account.ownerPage.name}
-            for page in pages
-              if (account.ownerPage.name != page.name)
-                  option(value="#{page.name}") #{page.name}
-          
-            
+        select(name='page',placeholder="Page",id="pepe",class="form-control")
+          option(value='#{page._id}') #{page.name} (#{page.url}),&emsp;id: #{page._id}
+          each otherPage in otherPages
+            option(value='#{otherPage._id}') #{otherPage.name} (#{otherPage.url}),&emsp;id: #{otherPage._id}
 
 
-        div
-          label(for="user") User
-          select(id="user" name="user" class="form-control")
-            option(value="#{account.ownerUser.name}") #{account.ownerUser.name}
-            for user in users
-              if (account.ownerUser.name != user.name)
-                option(value="#{user.name}") #{user.name}
+      div
+        label(for="user") User
+        select(name='user',placeholder="User",id="user",class="form-control")
+          option(value='#{user._id}') #{user.name} #{user.lastname},&emsp;id: #{user._id}
+          each otherUser in otherUsers
+            option(value='#{otherUser._id}') #{otherUser.name} #{otherUser.lastname},&emsp;id: #{otherUser._id}
       
         div
           label(for="ischanged") isChanged

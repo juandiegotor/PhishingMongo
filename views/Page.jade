@@ -2,13 +2,13 @@ extends ./layout.jade
 block contenido
     h1  Page
     h2
-      a(href="/Add/addPage") Crear Page
+      a(href="/Add/addPage") Crear Pagina
     
     form(action="/page/search",method="POST" )
       input(type="text",name="search",placeholder="Search",id="search",class="form-control")
       div(class="row top-space")
          div(class="col-xs-12 col-sm-6")
-           input(type="submit" value="Search" class="btn btn-info")
+           input(type="submit" value="Buscar" class="btn btn-info")
     
         
     div(class="container")      
@@ -17,9 +17,9 @@ block contenido
           .white.border.tr.large-padding
             .row
               .col-md-10
-                h4  Name: #{page.name} Url: #{page.url}  Protocol: #{page.protocol} IsHttp: #{page.ishttp}
+                h4  Nombre: #{page.name} Url: #{page.url} 
                 .col-md-2
-                  a(href="/edit/editPage/#{page._id}" ) Edit  
-                  a(href="/delete/page/#{page._id}" ) Delete 
+                  a(href="/delete/page/#{page._id}" ) Eliminar 
+                  a(href="/edit/editPage/#{page._id}" ) Editar 
           
                   
