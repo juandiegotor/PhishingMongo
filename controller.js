@@ -6,6 +6,7 @@ var app=express();//se inicia express
 
 var User=require("./models/user").User;
 var Page=require("./models/page").Page;
+var Account=require("./models/account").Account;
 
 //Se le dice que va a usar a app que es el objeto de express
 //-----------------------------
@@ -59,16 +60,17 @@ app.get("/user",function(req,res){
 
 
 
-app.get("/account",function(req,res){
 
-  res.render("Account.jade");
-
-});
 
 
 app.get("/account",function(req,res){
 
-  res.render("Account.jade");
+  Account.find().populate("ownerUser").populate("ownerPage").exec(function(err,accounts){
+  res.render("Account.jade",{accounts:accounts});
+
+  });
+
+
 
 });
 
@@ -85,7 +87,20 @@ app.get("/page",function(req,res){
 
 });
 
+//borrar cuenta
 
+app.get("/delete/account/:id",function(req,res){
+
+  Account.findOneAndRemove({_id:req.params.id},function(err){
+
+    if(!err){
+      res.redirect("/account");
+    }else{
+      console.log(err);
+    }
+
+  });
+});
 
 //borrar usuario
 app.get("/delete/user/:id",function(req,res){
@@ -271,6 +286,66 @@ app.post("/user/search",function(req,res){
   else{
   res.redirect("/user");
   }
+
+});
+
+app.post("/Add/addAccount",function(req,res){
+  var ischangeda=false;
+
+  if(String(req.body.ischanged)=="on"){
+  ischangeda=true;
+  }
+
+
+Page.findOne({name:req.body.page}).exec(function(err,pages){
+  if(!err&&pages!=null){
+
+  var pageId=pages._id;
+    console.log(pageId);
+
+    User.findOne({name:req.body.user}).exec(function(err,users){
+
+      if(!err&&users!=null){
+      var  userId=users._id;
+        console.log(userId);
+
+        var account=new Account({
+          username:req.body.username,
+          password:req.body.password,
+          isChanged:ischangeda,
+          ownerUser:userId,
+          ownerPage:pageId
+        });
+        account.save().then(function(us){
+      //res.send("Se guardo correctamente");
+      res.redirect("/account");
+        },
+      function(err){
+        res.send("No se pudo guardar");
+
+      });
+
+    }else{
+      res.send("us no valido");
+    }
+
+    });
+
+  }else{
+    res.send("pag no valida");
+  }
+
+});
+
+
+
+
+//  res.redirect("/Add/addAccount");
+
+
+
+
+
 
 
 

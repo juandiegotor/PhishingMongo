@@ -11,6 +11,10 @@ html(lang='en')
       li 
         h2
           a(href="/Add/addAccount") Crear
-      li 
-        h2
-          a(href="/") Eliminar   
+          
+      for account in accounts
+        div
+          p Pagina: #{account.ownerPage.name} Usuario: #{account.ownerUser.name} Username: #{account.username}
+              a(href="/delete/account/#{account._id}" ) Eliminar 
+          
+                  

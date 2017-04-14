@@ -8,23 +8,27 @@ html(lang='en')
 
     form(action="/Add/addAccount" method="POST" )
       div(class="form-group")
-        label(for="name") Name
-        input(type="text",name="name",placeholder="Name",id="name",class="form-control")
+        label(for="username") Username
+        input(type="text",name="username",placeholder="Username",id="username",class="form-control")
 
 
       div
-        label(for="lastname") Last Name
-        input(type="text",name="lastname",placeholder="LastName",id="lastname",class="form-control")
+        label(for="password") Password
+        input(type="text",name="password",placeholder="Password",id="password",class="form-control")
 
 
       div
-        label(for="address") Address
-        input(type="text",name="address",placeholder="Address",id="address",class="form-control")
+        label(for="page") Page
+        input(type="text",name="page",placeholder="Page",id="page",class="form-control")
 
 
       div
-        label(for="identification") Identification
-        input(type="text",name="identification",placeholder="Identification",id="identification",class="form-control")
+        label(for="user") User
+        input(type="text",name="user",placeholder="User",id="user",class="form-control")
+      
+        div
+          label(for="ischanged") isChanged
+          input(type="checkbox",name="ischanged",placeholder="ischanged",id="ischanged",class="form-control")  
 
 
         div(class="row top-space")
