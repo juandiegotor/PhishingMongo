@@ -24,15 +24,19 @@ app.use("/public",express.static('public'));//usar esta carpeta
 
 //redirecciono a las paginas cuando el link sea alguno de estos
 //---------------GET---------------------------------------
+//redirecciono a main
 app.get("/",function(req,res){
   res.render("index.jade");
 
 });
 
+
+//redirecciono a editar
 app.get("/edit/editAccount/:id",function(req,res){
 
   Account.findOne({_id:req.params.id}).populate("ownerUser").populate("ownerPage")
   .exec(function(err,account){
+
 
 
     User.find().exec(function(err,users){
@@ -45,6 +49,9 @@ app.get("/edit/editAccount/:id",function(req,res){
       })
     })
 
+
+
+      
 
 
   });
@@ -131,6 +138,7 @@ app.get("/user",function(req,res){
 app.get("/account",function(req,res){
 
   Account.find().populate("ownerUser").populate("ownerPage").exec(function(err,accounts){
+    //inner join con las otras dos tablas puedo acceder a atributos de la tabla con account.ownerPage.nombre
   res.render("Account.jade",{accounts:accounts});
 
   });

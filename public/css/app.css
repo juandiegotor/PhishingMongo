@@ -1,6 +1,6 @@
 .border{
   border: solid 1px #eee;
 };
-.tr{
+.tr:nth-of-type(odd){
   background-color: black;
 }
