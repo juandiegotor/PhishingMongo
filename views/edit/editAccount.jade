@@ -14,12 +14,22 @@ block contenido
 
       div
         label(for="page") Page
-        input(type="text",name="page",value="#{account.ownerPage.name}",id="page",class="form-control")
+        select(id="page" name="page" class="form-control")
+            option(value="#{account.ownerPage.name}") #{account.ownerPage.name}
+            for page in pages
+              if (account.ownerPage.name != page.name)
+                  option(value="#{page.name}") #{page.name}
+          
+            
 
 
-      div
-        label(for="user") User
-        input(type="text",name="user",value="#{account.ownerUser.name}",id="user",class="form-control")
+        div
+          label(for="user") User
+          select(id="user" name="user" class="form-control")
+            option(value="#{account.ownerUser.name}") #{account.ownerUser.name}
+            for user in users
+              if (account.ownerUser.name != user.name)
+                option(value="#{user.name}") #{user.name}
       
         div
           label(for="ischanged") isChanged

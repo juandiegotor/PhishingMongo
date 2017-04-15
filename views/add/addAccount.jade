@@ -14,12 +14,17 @@ block contenido
 
       div
         label(for="page") Page
-        input(type="text",name="page",placeholder="Page",id="page",class="form-control")
+        select(id="page" name="page" class="form-control")
+          for page in pages
+            option(value="#{page.name}") #{page.name}
+          
 
 
       div
         label(for="user") User
-        input(type="text",name="user",placeholder="User",id="user",class="form-control")
+        select(id="user" name="user" class="form-control")
+          for user in users
+            option(value="#{user.name}") #{user.name}
       
         div
           label(for="ischanged") isChanged

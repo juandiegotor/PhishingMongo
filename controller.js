@@ -35,7 +35,17 @@ app.get("/edit/editAccount/:id",function(req,res){
   .exec(function(err,account){
 
 
-      res.render("./edit/editAccount.jade",{account:account});
+    User.find().exec(function(err,users){
+
+      Page.find().exec(function(err,pages){
+
+
+      res.render("./edit/editAccount.jade",{account:account,users:users,pages:pages});
+
+      })
+    })
+
+
 
   });
 
@@ -72,7 +82,17 @@ app.get("/edit/editUser/:id",function(req,res){
 
 app.get("/Add/addAccount",function(req,res){
 
-res.render("./add/addAccount.jade");
+  User.find().exec(function(err,users){
+
+    Page.find().exec(function(err,pages){
+
+
+      res.render("./add/addAccount.jade",{users:users,pages:pages});
+
+    })
+  })
+
+
 
 });
 
